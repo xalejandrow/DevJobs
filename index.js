@@ -1,3 +1,6 @@
+const mongoose = require('mongoose');
+require('./config/db');
+
 const express = require('express');
 const exphbs = require('express-handlebars');
 const path = require('path');
