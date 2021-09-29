@@ -16,3 +16,7 @@ Sección 31: devJobs - Configurando la Base de Datos
 Instalamos las dependencias para trabajar en el proyecto
 
     npm install --save dotenv connect-mongo mongoose shortid express-session cookie-parse slug
+
+Capítulo 121 Agregar editor WYSIWYG
+    Trix:
+    https://github.com/basecamp/trix
