@@ -15,4 +15,4 @@ Sección 31: devJobs - Configurando la Base de Datos
 
 Instalamos las dependencias para trabajar en el proyecto
 
-    npm install --save dotenv connect-mongo mongoose shortid session cookie-parse
+    npm install --save dotenv connect-mongo mongoose shortid express-session cookie-parse
