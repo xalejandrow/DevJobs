@@ -20,3 +20,9 @@ Instalamos las dependencias para trabajar en el proyecto
 Capítulo 121 Agregar editor WYSIWYG
     Trix:
     https://github.com/basecamp/trix
+
+Capítulo 123 Agregar Webpack a la Aplicación
+
+    npm install --save-dev @babel/core @babel/preset-env babel-loader webpack webpack-cli
+    npm install --save concurrently
+
