@@ -1,21 +1,21 @@
 <main class="contenedor">
-    <form action="/vacantes/nueva" method="POST" class="default-form">
+    <form action="/vacantes/editar/{{vacante.url}}" method="POST" class="default-form">
         <h3>Información General</h3>
         <div class="campo">
             <label>Título</label>
-            <input type="text" name="titulo" placeholder="Ej: React Developer" id="" required>
+            <input type="text" name="titulo" placeholder="Ej: React Developer" id="" value="{{vacante.titulo}}" required>
         </div>
         <div class="campo">
             <label>Empresa</label>
-            <input type="text" name="empresa" placeholder="Empresa Contrata" id="" required>
+            <input type="text" name="empresa" placeholder="Empresa Contrata" id="" value="{{vacante.empresa}}" required>
         </div>
         <div class="campo">
             <label>Ubicación</label>
-            <input type="text" name="ubicacion" placeholder="Ej: País o Remoto" id="" required>
+            <input type="text" name="ubicacion" placeholder="Ej: País o Remoto" id="" value="{{vacante.ubicacion}}" required>
         </div>
         <div class="campo">
             <label>Salario (USD)</label>
-            <input type="text" name="salario" placeholder="Ej: 500 USD" id="" required>
+            <input type="text" name="salario" placeholder="Ej: 500 USD" id="" value="{{vacante.salario}}" required>
         </div>
         <div class="campo">
             <label>Contrato</label>
@@ -30,7 +30,7 @@
         <h3>Descripción del Puesto</h3>
         <div class="campo descripcion">
             <label >Descripción</label>
-            <input type="hidden" name="descripcion" id="x">
+            <input type="hidden" name="descripcion" id="x" value="{{{vacante.descripcion}}}">
             <trix-editor input="x"></trix-editor>
         </div>
 
