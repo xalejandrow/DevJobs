@@ -27,13 +27,20 @@ exports.validarRegistro = (req, res, next) => {
 
     const errores = req.validationErrors();
 
-    // if(){
-    //     // si no hay errores
+    if (errores) {
+        // si no hay errores
+        req.flash('error', errores.map(error => error.msg));
 
-    // }
+        res.render('crear-cuenta', {
+            nombrePagina: 'Crea tu cuenta en devJobs',
+            tagline: 'Comienza a publicar tus vacantes gratis, solo debes crear una cuenta',
+            mensajes: req.flash()
+        });
+        return;
+    }
 
     // Si toda la validación es correcta
-    next();  
+    next();
 
     // console.log(errores);
     // return;
@@ -46,7 +53,7 @@ exports.crearUsuario = async (req, res, next) => {
 
     const nuevoUsuario = await usuario.save();
 
-    if(!nuevoUsuario) return next();
+    if (!nuevoUsuario) return next();
 
     res.redirect('/iniciar-sesion');
 
