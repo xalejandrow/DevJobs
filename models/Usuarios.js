@@ -33,7 +33,7 @@ usuariosSchema.pre('save', async function(next) {
     this.password = hash;
     next();
 });
-
+// Envia alerta cuando un usuario ya esta registrado
 usuariosSchema.post('save', function(error, doc, next) {
     if(error.name === 'MongoError' && error.code === 11000){
         next('Ese correo ya está registrado');
@@ -41,5 +41,12 @@ usuariosSchema.post('save', function(error, doc, next) {
         next(error);
     }
 });
+
+// Autenticar Usuarios
+usuariosSchema.methods = {
+    compararPassword: function(password){
+        return bcrypt.compareSync(password, this.password);
+    }
+}
 
 module.exports = mongoose.model('Usuarios', usuariosSchema);
