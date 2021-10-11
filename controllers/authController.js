@@ -31,6 +31,9 @@ exports.mostrarPanel = async (req, res) => {
     res.render('administracion', {
         nombrePagina: 'Panel de Administración',
         tagline: 'Crea y Administra tus vacantes',
+        cerrarSesion: true,
+        nombre: req.user.nombre,
         vacantes
     })
 }
+
