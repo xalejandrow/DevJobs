@@ -2,11 +2,13 @@
     <form action="/editar-perfil" method="POST" class="default-form">
         <div class="campo">
             <label>Nombre</label>
-            <input value="{{usuario.nombre}}" type="text" name="nombre" placeholder="Tu Nombre" required>
+            <input value="{{usuario.nombre}}" type="text" name="nombre" placeholder="Tu Nombre">
+            {{!-- <input value="{{usuario.nombre}}" type="text" name="nombre" placeholder="Tu Nombre" required> --}}
         </div>        
         <div class="campo">
             <label>E-mail</label>
-            <input value={{usuario.email}} type="email" name="email" placeholder="Tu E-mail" required>
+            <input value={{usuario.email}} type="email" name="email" placeholder="Tu E-mail">
+            {{!-- <input value={{usuario.email}} type="email" name="email" placeholder="Tu E-mail" required> --}}
         </div>        
         <div class="campo">
             <label>Password</label>
