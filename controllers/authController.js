@@ -37,3 +37,9 @@ exports.mostrarPanel = async (req, res) => {
     })
 }
 
+exports.cerrarSesion = (req, res) => {
+    req.logout();
+    req.flash('correcto', 'Cerraste Sesión Correctamentre');
+    return res.redirect('/iniciar-sesion');
+}
+
