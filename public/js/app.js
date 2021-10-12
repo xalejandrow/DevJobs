@@ -109,10 +109,19 @@ const accionesListado = e => {
                             // console.log(e.target);
                             e.target.parentElement.parentElement.parentElement.removeChild(e.target.parentElement.parentElement);
                         }
+                    })
+                    .catch(() => {
+                        Swal.fire({
+                            type:'error',
+                            title: 'Hubo un error',
+                            text: 'No se puedo eliminar'
+                        })
                     });
             }
         })
-    } else {
+    } else if(e.target.tagName === 'A') {
+        // console.log(e.target.tagName);
+        // return;
         window.location.href = e.target.href;
     }
 }
