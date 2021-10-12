@@ -7,11 +7,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // Limpiar las alertas
     let alertas = document.querySelector('.alertas');
 
-    if(alertas){
+    if (alertas) {
         limpiarAlertas();
     }
 
-    if(skills){
+    if (skills) {
         skills.addEventListener('click', agregarSkills);
 
         // una vez que estamos en editar, llamar la función
@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const vacantesListado = document.querySelector('.panel-administracion');
 
-    if(vacantesListado){
+    if (vacantesListado) {
         vacantesListado.addEventListener('click', accionesListado);
     }
 })
@@ -28,12 +28,12 @@ document.addEventListener('DOMContentLoaded', () => {
 const skills = new Set();
 
 const agregarSkills = e => {
-    if(e.target.tagName === 'LI'){
-        if(e.target.classList.contains('activo')){
+    if (e.target.tagName === 'LI') {
+        if (e.target.classList.contains('activo')) {
             // quitarlo del set y quitar la clase
             skills.delete(e.target.textContent);
             e.target.classList.remove('activo');
-        }else{
+        } else {
             // agregarlo al set y agregar la clase
             skills.add(e.target.textContent);
             e.target.classList.add('activo');
@@ -54,15 +54,15 @@ const skillsSeleccionados = () => {
     // inyectarlo en el hidden
     const skillsArray = [...skills]
     document.querySelector('#skills').value = skillsArray
-    
+
 }
 
 const limpiarAlertas = () => {
     const alertas = document.querySelector('.alertas');
     const interval = setInterval(() => {
-        if(alertas.children.length > 0 ){
+        if (alertas.children.length > 0) {
             alertas.removeChild(alertas.children[0]);
-        }else if(alertas.children.length === 0) {
+        } else if (alertas.children.length === 0) {
             alertas.parentElement.removeChild(alertas);
             clearInterval(interval);
         }
@@ -74,10 +74,45 @@ const accionesListado = e => {
     // console.log(e);
     e.preventDefault();
     // console.log(e.target);
-    if(e.target.dataset.eliminar){
+    if (e.target.dataset.eliminar) {
         // eliminar por axios
 
-    }else{
+        // const url = `${location.origin}/vacantes/eliminar/${e.target.dataset.eliminar}`;
+        // console.log(url);
+        // return;
+        Swal.fire({
+            title: '¿Confirmar Eliminación?',
+            text: "Una vez eliminada, no se puede recuperar",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, Eliminar',
+            cancelButtonText: 'No, Cancelar'
+        }).then((result) => {
+            if (result.value) {
+
+                // enviar la petición con axios
+                const url = `${location.origin}/vacantes/eliminar/${e.target.dataset.eliminar}`;
+
+                // Axios para eliminar el registro
+                axios.delete(url, { params: { url } })
+                    .then(function (respuesta) {
+                        // console.log(respuesta);
+                        if (respuesta.status === 200) {
+                            Swal.fire(
+                                'Eliminado',
+                                respuesta.data,
+                                'success'
+                            );
+                            // TODO: Eliminar del DOM
+                            // console.log(e.target);
+                            e.target.parentElement.parentElement.parentElement.removeChild(e.target.parentElement.parentElement);
+                        }
+                    });
+            }
+        })
+    } else {
         window.location.href = e.target.href;
     }
 }

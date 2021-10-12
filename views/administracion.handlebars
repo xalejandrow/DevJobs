@@ -6,10 +6,10 @@
     </div>
 
     <h2>Tus Vacantes</h2>
-
+<div class="panel-administracion">
     {{#if vacantes.length}}
         {{#each vacantes}}
-            <div class="vacante panel-administracion">
+            <div class="vacante">
                 <div class="caja">
                     <h3>{{empresa}}</h3>
                     <p class="puesto">{{titulo}}</p>
@@ -22,11 +22,12 @@
                 </div>
                 <div class="centrar-vertical caja">
                     {{!-- <a href="#" data-eliminar={{id}} class="btn btn-rojo">Eliminar</a> --}}
-                    <a href="#" data-eliminar="{{id}}" class="btn btn-rojo">Eliminar</a>
+                    <a href="#" data-eliminar={{_id}} class="btn btn-rojo">Eliminar</a>
                 </div>
             </div>
         {{/each}}
     {{else}}
         <p>No Hay vacantes, crea una</p>
     {{/if}}
+</div>
 </main>
