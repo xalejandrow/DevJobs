@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const Usuarios = mongoose.model('Usuarios');
 const multer = require('multer');
+const shortid = require('shortid');
+// const uuid = require('uuid') // se podría utilizar en vez de shortid, pero vamos a utilizar shortid
 
 exports.subirImagen = (req, res, next) => {
     upload(req, res, function(error){
@@ -10,6 +12,23 @@ exports.subirImagen = (req, res, next) => {
     });
     next();
 }
+
+// Opciones de Multer
+const configuracionMulter = {
+    storage: fileStorage = multer.diskStorage({
+        destination: (req, file, cb) => {
+            cb(null, __dirname + '../../public/uploads/perfiles');
+        },
+        filename: (req, file, cb) => {
+            // console.log(file);
+            const extension = file.mimetype.split('/')[1];
+            // console.log(`${shortid.generate()}.${extension}`);
+            cb(null, `${shortid.generate()}.${extension}`);
+        }
+    })
+}
+
+const upload = multer(configuracionMulter).single('imagen');
 
 exports.formCrearCuenta = (req, res) => {
     res.render('crear-cuenta', {
