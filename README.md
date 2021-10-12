@@ -26,3 +26,7 @@ Capítulo 123 Agregar Webpack a la Aplicación
     npm install --save-dev @babel/core @babel/preset-env babel-loader webpack webpack-cli
     npm install --save concurrently
 
+Capítulo 156 Detectando cuando el Usuario presiona el botón eliminar
+
+    npm install --save axios sweetalert2
+    

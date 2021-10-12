@@ -81,12 +81,14 @@ exports.validarVacante = (req, res, next) => {
     req.sanitizeBody('contrato').escape();
     req.sanitizeBody('skills').escape();
 
-    // validar
+    // // validar
     req.checkBody('titulo', 'Agrega un Título a la Vacante').notEmpty();
     req.checkBody('empresa', 'Agrega una Empresa').notEmpty();
     req.checkBody('ubicacion', 'Agrega una Ubicación').notEmpty();
     req.checkBody('contrato', 'Selecciona el Tipo de Contrato').notEmpty();
     req.checkBody('skills', 'Agrega al menos una habilidad').notEmpty();
+   
+
 
     const errores = req.validationErrors();
 
@@ -105,5 +107,11 @@ exports.validarVacante = (req, res, next) => {
 
     next(); // siguiente middleware
 
+}
+
+exports.eliminarVacante = async (req, res) => {
+    const { id } = req.params;
+
+    console.log(id);
 
 }
