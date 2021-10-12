@@ -6,10 +6,14 @@ const shortid = require('shortid');
 
 exports.subirImagen = (req, res, next) => {
     upload(req, res, function(error){
-        // console.log(error);
         if(error){
+            // console.log(error);
             if(error instanceof multer.MulterError){
-                return next();
+                if(error.code === 'LIMIT_FILE_SIZE'){
+                    req.flash('error', 'El archivo es muy grande: Máximo 100kb');
+                }else{
+                    req.flash('error', error.message);
+                }
             }else{
                 // console.log(error.message);
                 req.flash('error', error.message);
@@ -24,6 +28,7 @@ exports.subirImagen = (req, res, next) => {
 
 // Opciones de Multer
 const configuracionMulter = {
+    limits : { fileSize : 100000 },
     storage: fileStorage = multer.diskStorage({
         destination: (req, file, cb) => {
             cb(null, __dirname + '../../public/uploads/perfiles');
@@ -42,8 +47,7 @@ const configuracionMulter = {
         }else{
             cb(new Error('Formato no Válido'), false);
         }
-    },
-    limits : { fileSize : 100000 }
+    }
 }
 
 const upload = multer(configuracionMulter).single('imagen');
