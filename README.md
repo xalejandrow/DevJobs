@@ -29,4 +29,11 @@ Capítulo 123 Agregar Webpack a la Aplicación
 Capítulo 156 Detectando cuando el Usuario presiona el botón eliminar
 
     npm install --save axios sweetalert2
+
+
+Sección 40: devJobs - Subir Imagenes de Perfil
+
+Capítulo 159. Introducción a Multer
+
+    npm install --save multer
     
