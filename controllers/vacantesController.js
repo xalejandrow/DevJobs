@@ -215,7 +215,7 @@ exports.contactar =  async (req, res, next) => {
 
 
 exports.mostrarCandidatos = async (req, res, next) => {
-    const vacante = await Vacante.findById(req.params.id);
+    const vacante = await Vacante.findById(req.params.id).lean();
     // console.log(vacante);
     if(vacante.autor != req.user._id.toString()){
        return next();
