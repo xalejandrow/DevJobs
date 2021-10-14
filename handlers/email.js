@@ -1,6 +1,6 @@
 const emailConfig = require('../config/email');
 const nodemailer = require('nodemailer');
-const nbs = require('nodemailer-express-handlebars');
+const hbs = require('nodemailer-express-handlebars');
 const util = require('util');
 
 let transport = nodemailer.createTransport({
@@ -11,6 +11,21 @@ let transport = nodemailer.createTransport({
         pass: emailConfig.pass
     }
 });
+
+// Utilizar templates de Handlebars
+transport.use(
+    'compile',
+    hbs({
+      viewEngine: {
+        extName: 'handlebars',
+        partialsDir: __dirname + '/../views/emails',
+        layoutsDir: __dirname + '/../views/emails',
+        defaultLayout: 'reset.handlebars'
+      },
+      viewPath: __dirname + '/../views/emails',
+      extName: '.handlebars'
+    })
+  );
 
 exports.enviar = async(opciones) => {
 
