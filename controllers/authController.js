@@ -7,16 +7,16 @@ const enviarEmail = require('../handlers/email');
 
 exports.autenticarUsuario = passport.authenticate('local', {
     successRedirect: '/administracion',
-    failureRedirect : '/iniciar-sesion',
+    failureRedirect: '/iniciar-sesion',
     failureFlash: true,
     badRequestMessage: 'Ambos campos son obligatorios'
 });
 
 // Revisar si el usuario está autenticado o no
 exports.verificarUsuario = (req, res, next) => {
-    
+
     // revisar el usuario
-    if(req.isAuthenticated()){
+    if (req.isAuthenticated()) {
         return next(); // estan autenticados
     }
 
@@ -27,7 +27,7 @@ exports.verificarUsuario = (req, res, next) => {
 exports.mostrarPanel = async (req, res) => {
 
     // consultar el usuario autenticado
-    const vacantes = await Vacante.find({ autor: req.user._id}).lean();
+    const vacantes = await Vacante.find({ autor: req.user._id }).lean();
 
     // console.log(vacantes);
 
@@ -57,10 +57,10 @@ exports.formReestablecerPassword = (req, res) => {
 }
 
 // Genera el Token en la tabla del usuario
-exports.enviarToken =  async (req, res) => {
+exports.enviarToken = async (req, res) => {
     const usuario = await Usuarios.findOne({ email: req.body.email });
 
-    if(!usuario) {
+    if (!usuario) {
         req.flash('error', 'No existe esa cuenta');
         return res.redirect('/iniciar-sesion');
     }
@@ -78,7 +78,7 @@ exports.enviarToken =  async (req, res) => {
     // Enviar notificación por email
     await enviarEmail.enviar({
         usuario,
-        subject : 'Password Reset',
+        subject: 'Password Reset',
         resetUrl,
         archivo: 'reset'
     });
@@ -87,4 +87,25 @@ exports.enviarToken =  async (req, res) => {
     req.flash('correcto', 'Revisa tu email para las indicaciones');
     res.redirect('/iniciar-sesion');
 
+}
+
+// Valida si el token  es válido y el usuario existe, muestra la vista
+exports.reestablecerPassword = async (req, res) => {
+    console.log(req);
+    const usuario = await Usuarios.findOne({
+        token: req.params.token,
+        expira: {
+            $gt: Date.now()
+        }
+    });
+
+    if(!usuario){
+        req.flash('error', 'El formulario ya no es válido, intenta de nuevo');
+        return res.redirect('/reestablecer-password');
+    }
+
+    // Todo bien, mostrar el formulario
+    res.render('nuevo-password', {
+        nombrePagina : 'Nuevo Password'
+    })
 }
