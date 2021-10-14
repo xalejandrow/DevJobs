@@ -91,7 +91,6 @@ exports.enviarToken = async (req, res) => {
 
 // Valida si el token  es válido y el usuario existe, muestra la vista
 exports.reestablecerPassword = async (req, res) => {
-    console.log(req);
     const usuario = await Usuarios.findOne({
         token: req.params.token,
         expira: {
@@ -108,4 +107,33 @@ exports.reestablecerPassword = async (req, res) => {
     res.render('nuevo-password', {
         nombrePagina : 'Nuevo Password'
     })
+}
+
+// Almacena el nuevo password en la BD
+exports.guardarPassword = async (req, res) => {
+    const usuario = await Usuarios.findOne({
+        token: req.params.token,
+        expira: {
+            $gt: Date.now()
+        }
+    });
+
+    // no existe el usuario o el token es inválido
+    if(!usuario){
+        req.flash('error', 'El formulario ya no es válido, intenta de nuevo');
+        return res.redirect('/reestablecer-password');
+    }
+
+    // Asignar nuevo password, limpiar valores previos
+    usuario.password = req.body.password;
+    usuario.token = undefined;
+    usuario.expira = undefined;
+
+    // Agregar y eliminar valores del objeto
+    await usuario.save();
+
+    // redirigir
+    req.flash('correcto','Password Modificado Correctamente');
+    res.redirect('/iniciar-sesion');
+    
 }
