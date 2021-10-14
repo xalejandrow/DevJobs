@@ -37,3 +37,10 @@ Capítulo 159. Introducción a Multer
 
     npm install --save multer
     
+Sección 42: devJobs - Agregar funcionalidad a Olvide mi Password y Enviar Email 
+
+Capítulo 174. Configurando NodeMailer
+
+    npm install --save nodemailer nodemailer-express-handlebars
+    https://mailtrap.io
+    
