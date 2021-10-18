@@ -81,7 +81,10 @@ app.use((error, req, res, next) => {
 const host = '0.0.0.0';
 const port = process.env.PORT;
 
-// app.listen(process.env.PUERTO);
-app.listen(port, host, () => {
-    console.log('El servidor esta funcionando');
-});
+// Para localhost
+app.listen(process.env.PUERTO);
+
+// Para Heroku
+// app.listen(port, host, () => {
+//     console.log('El servidor esta funcionando');
+// });

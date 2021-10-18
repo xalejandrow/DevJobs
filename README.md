@@ -63,4 +63,18 @@ Capítulo 181 Deployment del Proyecto en Heroku
 
     url en heroku:
     https://whispering-hamlet-82809.herokuapp.com/
-    
+
+
+NOTA:
+
+        // Dejar que Heroku asigne el puerto
+        const host = '0.0.0.0';
+        const port = process.env.PORT;
+
+        // Para localhost poner esta línea en index.js
+        app.listen(process.env.PUERTO);
+
+        // Para Heroku poner esta línea en index.js
+        // app.listen(port, host, () => {
+        //     console.log('El servidor esta funcionando');
+        // });

@@ -19,3 +19,4 @@ COPY --from=build-stage /devjobs/build /usr/share/nginx/html
 EXPOSE $REACT_DOCKER_PORT
 
 CMD npm start
+#CMD npm desarrollo
