@@ -53,3 +53,14 @@ Capítulo 179 Manejo de Errores
     lista de errores y uso:
     https://www.npmjs.com/package/http-errors
 
+
+Capítulo 181 Deployment del Proyecto en Heroku
+
+    heroku create --remote production
+    heroku config:set DATABASE="mongodb+srv://root:<PASSWORD>@cluster0.xsl8t.mongodb.net/devjobs"
+    heroku config:set SECRETO=<clave_secreto>
+    heroku config:set KEY=<llave_secreta>
+
+    url en heroku:
+    https://whispering-hamlet-82809.herokuapp.com/
+    
