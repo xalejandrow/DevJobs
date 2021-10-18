@@ -61,6 +61,9 @@ Capítulo 181 Deployment del Proyecto en Heroku
     heroku config:set SECRETO=<clave_secreto>
     heroku config:set KEY=<llave_secreta>
 
+    Subir a Heroku:
+    git push production master
+
     url en heroku:
     https://whispering-hamlet-82809.herokuapp.com/
 
