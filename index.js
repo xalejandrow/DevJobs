@@ -68,7 +68,7 @@ app.use((req, res, next) => {
 });
 
 // Administración de los errores
-app.use((error, req, res) => {
+app.use((error, req, res, next) => {
     // console.log(error.message);
     res.locals.mensaje = error.message;
     const status = error.status || 500;
