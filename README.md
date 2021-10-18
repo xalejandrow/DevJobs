@@ -42,5 +42,14 @@ Sección 42: devJobs - Agregar funcionalidad a Olvide mi Password y Enviar Email
 Capítulo 174. Configurando NodeMailer
 
     npm install --save nodemailer nodemailer-express-handlebars
+    Servicio de Email:
     https://mailtrap.io
     
+Sección 43: Últimos Ajustes y Deployment
+
+Capítulo 179 Manejo de Errores
+
+    npm install --save http-errors
+    lista de errores y uso:
+    https://www.npmjs.com/package/http-errors
+
